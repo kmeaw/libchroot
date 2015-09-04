@@ -27,9 +27,9 @@ open (const char *file, int flags, mode_t mode)
 int
 open64 (const char *file, int flags, mode_t mode)
 {
-  if (strcmp ("/dev/null", file) == 0)
+  if (0 == strcmp ("/dev/null", file))
     return dup (fdnull);
-  if (strcmp ("/dev/zero", file) == 0)
+  if (0 == strcmp ("/dev/zero", file))
     return dup (fdzero);
 
   return real_open64 (file, flags, mode);

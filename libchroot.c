@@ -2,6 +2,7 @@
 #include <asm-generic/fcntl.h>
 #include <dlfcn.h>
 #include <errno.h>
+#include <grp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -83,6 +84,11 @@ void __attribute__ ((constructor)) run ()
 	}
     }
 
+  if (chdir (dir) == -1)
+    {
+      perror ("chdir");
+      abort ();
+    }
   if (chroot (dir) == -1)
     {
       perror ("libchroot: chroot");
